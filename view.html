@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kshitij Bhavsar | Futuristic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --secondary: #7b2cbf;
+            --accent: #ff2d75;
+            --dark: #0a0a1a;
+            --light: #e2f1f8;
+            --neon-glow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 30px var(--primary);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Background Elements */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(10, 10, 26, 0.8) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 10, 26, 0.8) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-shadow: var(--neon-glow);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            }
+            100% {
+                text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary), 0 0 60px var(--primary);
+            }
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--light);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .tagline::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 1.5rem auto 0;
+            border-radius: 3px;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 3rem 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 3px;
+        }
+        
+        .content-box {
+            background: rgba(10, 10, 26, 0.7);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 247, 255, 0.2);
+            border-color: rgba(0, 247, 255, 0.4);
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .skill-item {
+            background: rgba(123, 44, 191, 0.1);
+            border: 1px solid rgba(123, 44, 191, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .skill-item:hover {
+            background: rgba(123, 44, 191, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(123, 44, 191, 0.2);
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            aspect-ratio: 1/1;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 247, 255, 0.3);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Contact Section */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light);
+            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(0, 247, 255, 0.1);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-link:hover {
+            background: rgba(0, 247, 255, 0.2);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 247, 255, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0, 247, 255, 0.2);
+        }
+        
+        .thank-you {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #d18514, #5f1f94, #7dbc2a, #fd521e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="header-content">
+                <h1>Kshitij Bhavsar</h1>
+                <p class="tagline">UI/UX Designer & Developer | Tech Enthusiast | Nature Lover</p>
+            </div>
+        </header>
+        
+        <!-- About Section -->
+        <section class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="content-box">
+                <p>Hello! I'm <span class="highlight">Kshitij Rajesh Bhavsar</span>, a passionate UI/UX designer and front-end developer with expertise in creating beautiful, user-friendly digital experiences.</p>
+                <p>With skills spanning <span class="highlight">HTML, CSS, and JavaScript </span>, I bridge the gap between design and technology to build interfaces that are both visually stunning and highly functional.</p>
+                <p>My approach combines aesthetic sensibility with technical precision, ensuring every project delivers exceptional user experiences while meeting business objectives.</p>
+            </div>
+        </section>
+        
+        <!-- Professional Background -->
+        <section class="section">
+            <h2 class="section-title">Professional Journey</h2>
+            <div class="content-box">
+                <p>I bring extensive experience in <span class="highlight">web development</span> with a focus on responsive design and interactive user interfaces. My professional journey has been marked by continuous learning and adaptation to emerging technologies.</p>
+                <p>Currently, I'm expanding my expertise into <span class="highlight">AI/ML </span>, recognizing these as critical areas for the future of technology. This commitment to self-skilling keeps me versatile in our rapidly evolving digital landscape.</p>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="content-box">
+                <div class="skills-grid">
+                    <div class="skill-item">UI/UX Design</div>
+                    <div class="skill-item">HTML5</div>
+                    <div class="skill-item">CSS3</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Java</div>
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">Figma</div>
+                    <div class="skill-item">Canva</div>
+                    <div class="skill-item">Blender</div>
+                    <div class="skill-item">Adoby PS</div>
+                    <div class="skill-item">AI/ML Basics</div>
+                    <div class="skill-item">Problem Solving</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Personal Interests -->
+        <section class="section">
+            <h2 class="section-title">Beyond Code</h2>
+            <div class="content-box">
+                <p>When I'm not designing or coding, you'll find me <span class="highlight">climbing mountains</span> and immersing myself in nature's tranquility. There's something magical about reaching new heights and witnessing breathtaking landscapes.</p>
+                <p>I'm also an avid sports enthusiast who enjoys the camaraderie and competition of <span class="highlight">cricket, badminton, and football</span>. These activities keep me physically active and mentally sharp.</p>
+                <p>My professional identity reflects a balance between technical precision and creative expression, always focusing on delivering exceptional results rather than flashy presentations.</p>
+            </div>
+        </section>
+        
+        <!-- Gallery Section -->
+        <section class="section">
+            <h2 class="section-title">My Team & Adventures</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="imggallery2.jpeg" alt="Team collaboration">
+                    <div class="gallery-caption">Team Collaboration</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="imggallery11.jpeg" alt="Outdoor adventure">
+                    <div class="gallery-caption">Outdoor Adventure</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="imggallery9.jpeg" alt="Project work">
+                    <div class="gallery-caption">Project Work</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="imggallery3.jpeg" alt="Team event">
+                    <div class="gallery-caption">Team Event</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="imggallery6.jpeg" alt="Nature exploration">
+                    <div class="gallery-caption">Nature Exploration</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="WhatsApp Image 2025-03-18 at 19.36.02.jpeg" alt="Sports activity">
+                    <div class="gallery-caption">Sports Activity</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section class="section">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="content-box">
+                <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's create something amazing together!</p>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/kshitij-bhavsar-159515290/" class="contact-link" target="_blank">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="mailto:your.email@example.com" class="contact-link">
+                        <i class="fas fa-envelope"></i> Email Me
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p class="thank-you">Thank you for visiting my portfolio!</p>
+            <p>© 2023 Kshitij Bhavsar. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random size between 1px and 3px
+            const size = Math.random() * 2 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.bottom = `-${size}px`;
+            
+            // Random animation duration between 10s and 30s
+            const duration = Math.random() * 20 + 10;
+            particle.style.animationDuration = `${duration}s`;
+            
+            // Random delay
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Add hover effect to content boxes
+        const contentBoxes = document.querySelectorAll('.content-box');
+        contentBoxes.forEach(box => {
+            box.addEventListener('mouseenter', () => {
+                const letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                box.style.borderColor = color;
+            });
+            
+            box.addEventListener('mouseleave', () => {
+                box.style.borderColor = 'rgba(0, 247, 255, 0.2)';
+            });
+        });
+    </script>
+</body>
+</html>
